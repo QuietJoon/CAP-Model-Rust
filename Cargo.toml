@@ -1,0 +1,13 @@
+[package]
+name = "CAP-Model"
+version = "0.1.0"
+authors = ["YongJoon Joe"]
+edition = "2018"
+
+[lib]
+name = "cap_model"
+path = "src/lib.rs"
+edition = "2018"
+
+[dependencies]
+rand = "*"
