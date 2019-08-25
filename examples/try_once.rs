@@ -6,7 +6,6 @@ use rand::Rng;
 
 use cap_model::addressing::*;
 use cap_model::caller::*;
-use cap_model::data::*;
 use cap_model::*;
 
 const N: usize = 3;

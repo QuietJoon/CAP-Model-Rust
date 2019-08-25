@@ -1,4 +1,5 @@
 // Proxy
+use std::sync::{Arc, Mutex};
 use std::sync::mpsc::*;
 use std::thread;
 use std::time::Duration;
@@ -12,7 +13,7 @@ pub fn proxy(
     ref_id: RefID,
     req_body: ReqBody,
     num_org: usize,
-    rx_proxy: Receiver<Sender<RespBody>>,
+    rx_proxy: Receiver<AMOS>,
 ) {
     if DEBUG {
         println!("Start proxy for {}", &ref_id);
@@ -30,7 +31,7 @@ pub fn proxy(
                 if DEBUG {
                     println!("P {} receives: {}", &ref_id, &count);
                 }
-                send_until_success(resp_body.clone(), res.unwrap());
+                assign_until_success(resp_body.clone(), res.unwrap());
                 count += 1;
             } else {
                 break;

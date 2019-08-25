@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
 use std::sync::mpsc::*;
 use std::thread;
 use std::time::Duration;
@@ -11,7 +12,7 @@ use crate::proxy::*;
 use crate::util::*;
 
 pub fn addressing(rx_addr: Receiver<AddressingMsg>) {
-    let mut the_table: HashMap<String, Sender<Sender<ReqBody>>> = HashMap::new();
+    let mut the_table: HashMap<String, Sender<AMOS>> = HashMap::new();
 
     loop {
         let res = rx_addr.try_recv();

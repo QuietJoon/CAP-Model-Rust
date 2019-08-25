@@ -10,4 +10,12 @@ path = "src/lib.rs"
 edition = "2018"
 
 [dependencies]
+argparse = "*"
+libmath = "*"
+num = "*"
 rand = "*"
+rust-crypto = "*"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+twox-hash = "*"

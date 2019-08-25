@@ -1,3 +1,4 @@
+use std::sync::{Arc, Mutex};
 use std::sync::mpsc::*;
 use std::thread;
 use std::time::Duration;
@@ -15,20 +16,20 @@ pub fn caller(
     if DEBUG {
         println!("Start caller for {}", &ref_id);
     }
-    let (tx_caller, rx_caller) = channel();
+    let amo_resp_body = Arc::new(Mutex::new(None));
 
     let addressing_msg = AddressingMsg {
         ref_id: ref_id.clone(),
         req_body: req_body.clone(),
         num_org: num_org,
-        tx_caller: tx_caller,
+        tx_caller: amo_resp_body.clone(),
     };
 
     send_until_success(addressing_msg, tx_addressing);
 
     // TODO: Find an appropriate value
     sleep!(128);
-    let resp_body = recv_until_success(rx_caller);
+    let resp_body = read_until_success(amo_resp_body);
     if DEBUG {
         println!("End caller for {}", &ref_id);
     }
