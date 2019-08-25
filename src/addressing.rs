@@ -11,7 +11,7 @@ use crate::proxy::*;
 use crate::util::*;
 
 pub fn addressing(rx_addr: Receiver<AddressingMsg>) {
-    let mut the_table: HashMap<String, Sender<Sender<RespBody>>> = HashMap::new();
+    let mut the_table: HashMap<String, Sender<Sender<ReqBody>>> = HashMap::new();
 
     loop {
         let res = rx_addr.try_recv();
