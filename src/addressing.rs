@@ -24,7 +24,7 @@ pub fn addressing(rx_addr: Receiver<AddressingMsg>) {
                 println!("A received: {}", &addr_msg.ref_id);
             }
 
-            let o_tx_proxy = the_table.get(&addr_msg.ref_id.clone());
+            let o_tx_proxy = the_table.get(&addr_msg.ref_id);
             if o_tx_proxy.is_some() {
                 if DEBUG {
                     println!("'A sends msg to proxy {}", &addr_msg.ref_id);
@@ -48,7 +48,7 @@ pub fn addressing(rx_addr: Receiver<AddressingMsg>) {
                 if DEBUG {
                     println!(" A sends msg to proxy {}", &addr_msg.ref_id);
                 }
-                send_until_success(addr_msg.tx_caller, tx_proxy.clone());
+                send_until_success(addr_msg.tx_caller, tx_proxy);
             }
         }
     }

@@ -21,7 +21,7 @@ pub fn caller(
         ref_id: ref_id.clone(),
         req_body: req_body.clone(),
         num_org: num_org,
-        tx_caller: tx_caller.clone(),
+        tx_caller: tx_caller,
     };
 
     send_until_success(addressing_msg, tx_addressing);

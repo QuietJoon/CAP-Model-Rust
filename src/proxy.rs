@@ -30,7 +30,7 @@ pub fn proxy(
                 if DEBUG {
                     println!("P {} receives: {}", &ref_id, &count);
                 }
-                send_until_success(resp_body.clone(), res.unwrap().clone());
+                send_until_success(resp_body.clone(), res.unwrap());
                 count += 1;
             } else {
                 break;

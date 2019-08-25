@@ -31,7 +31,7 @@ fn main() {
             let r: u64 = rng.gen();
             let r100 = r % 100;
             let a_ref_id = format!("RefID#{:04}", tn);
-            let a_req_body = format!("ReqBody#{:04}", tn).clone();
+            let a_req_body = format!("ReqBody#{:04}", tn);
             let a_tx = tx_addr.clone();
             let a_tx_resp = tx_resp.clone();
 
