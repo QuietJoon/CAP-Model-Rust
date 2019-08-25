@@ -44,11 +44,14 @@ pub fn read_until_success<T: Clone>(amot: Arc<Mutex<Option<T>>>) -> T {
         } else {
             let mg_datum = datum.unwrap();
 
-            if mg_datum.is_some() {
-                return mg_datum.unwrap();
-            } else {
-                sleep!(1);
-            }
+            // TODO: Not sure why this works.
+            match *mg_datum {
+                Some(ref d) => {
+                    let ref_T: &T = d;
+                    return ref_T.clone();
+                },
+                None => sleep!(1),
+            };
         }
     }
 }
