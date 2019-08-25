@@ -3,8 +3,6 @@
 #![allow(non_camel_case_types)]
 #![allow(unused_imports)]
 #[macro_use]
-extern crate serde_derive;
-#[macro_use]
 pub mod debug;
 #[macro_use]
 pub mod util;
