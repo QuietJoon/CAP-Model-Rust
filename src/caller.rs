@@ -12,7 +12,9 @@ pub fn caller(
     num_org: usize,
     tx_addressing: Sender<AddressingMsg>,
 ) -> RespBody {
-    if DEBUG {println!("Start caller for {}", &ref_id);}
+    if DEBUG {
+        println!("Start caller for {}", &ref_id);
+    }
     let (tx_caller, rx_caller) = channel();
 
     let addressing_msg = AddressingMsg {
@@ -27,7 +29,9 @@ pub fn caller(
     // TODO: Find an appropriate value
     sleep!(128);
     let resp_body = recv_until_success(rx_caller);
-    if DEBUG {println!("End caller for {}", &ref_id);}
+    if DEBUG {
+        println!("End caller for {}", &ref_id);
+    }
 
     resp_body
 }

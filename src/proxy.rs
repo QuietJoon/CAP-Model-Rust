@@ -14,7 +14,9 @@ pub fn proxy(
     num_org: usize,
     rx_proxy: Receiver<Sender<RespBody>>,
 ) {
-    if DEBUG {println!("Start proxy for {}", &ref_id);}
+    if DEBUG {
+        println!("Start proxy for {}", &ref_id);
+    }
     let resp_body = interact(&ref_id, req_body);
     let mut count = 0;
 
@@ -25,7 +27,9 @@ pub fn proxy(
             sleep!(1);
         } else {
             if count < num_org {
-                if DEBUG {println!("P {} receives: {}", &ref_id, &count);}
+                if DEBUG {
+                    println!("P {} receives: {}", &ref_id, &count);
+                }
                 send_until_success(resp_body.clone(), res.unwrap().clone());
                 count += 1;
             } else {
@@ -33,7 +37,9 @@ pub fn proxy(
             }
         }
     }
-    if DEBUG {println!("End proxy for {}", ref_id);}
+    if DEBUG {
+        println!("End proxy for {}", ref_id);
+    }
 }
 
 fn interact(ref_id: &RefID, req_body: ReqBody) -> RespBody {

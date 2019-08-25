@@ -20,11 +20,15 @@ pub fn addressing(rx_addr: Receiver<AddressingMsg>) {
             sleep!(1);
         } else {
             let addr_msg = res.unwrap();
-            if DEBUG {println!("A received: {}", &addr_msg.ref_id);}
+            if DEBUG {
+                println!("A received: {}", &addr_msg.ref_id);
+            }
 
             let o_tx_proxy = the_table.get(&addr_msg.ref_id.clone());
             if o_tx_proxy.is_some() {
-                if DEBUG {println!("'A sends msg to proxy {}", &addr_msg.ref_id);}
+                if DEBUG {
+                    println!("'A sends msg to proxy {}", &addr_msg.ref_id);
+                }
                 let tx_proxy = o_tx_proxy.unwrap();
                 send_until_success(addr_msg.tx_caller, tx_proxy.clone());
             } else {
@@ -35,11 +39,15 @@ pub fn addressing(rx_addr: Receiver<AddressingMsg>) {
                 let a_req_body = addr_msg.req_body.clone();
                 let num_org = addr_msg.num_org;
                 thread::spawn(move || {
-                    if DEBUG {println!("A spawns proxy for {}", &a_ref_id);}
+                    if DEBUG {
+                        println!("A spawns proxy for {}", &a_ref_id);
+                    }
                     proxy(a_ref_id, a_req_body, num_org, rx_proxy);
                 });
 
-                if DEBUG {println!(" A sends msg to proxy {}", &addr_msg.ref_id);}
+                if DEBUG {
+                    println!(" A sends msg to proxy {}", &addr_msg.ref_id);
+                }
                 send_until_success(addr_msg.tx_caller, tx_proxy.clone());
             }
         }
