@@ -17,8 +17,9 @@ pub fn proxy(
     if DEBUG {
         println!("Start proxy for {}", &ref_id);
     }
-    let resp_body = interact(&ref_id, req_body);
+
     let mut count = 0;
+    let mut tx_resps = Vec::with_capacity(num_org);
 
     loop {
         let res = rx_proxy.try_recv();
@@ -31,9 +32,13 @@ pub fn proxy(
             if DEBUG {
                 println!("P {} receives: {}", &ref_id, &count);
             }
-            send_until_success(resp_body.clone(), res.unwrap());
+            tx_resps.push(res.unwrap());
             count += 1;
         }
+    }
+    let resp_body = interact(&ref_id, req_body);
+    for tx_resp in tx_resps {
+        send_until_success(resp_body.clone(), tx_resp);
     }
     if DEBUG {
         println!("End proxy for {}", ref_id);
