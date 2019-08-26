@@ -22,19 +22,17 @@ pub fn proxy(
 
     loop {
         let res = rx_proxy.try_recv();
-        if res.is_err() {
+        if count >= num_org {
+            break;
+        } else if res.is_err() {
             // TODO: Find an appropriate value
             sleep!(1);
         } else {
-            if count < num_org {
-                if DEBUG {
-                    println!("P {} receives: {}", &ref_id, &count);
-                }
-                send_until_success(resp_body.clone(), res.unwrap());
-                count += 1;
-            } else {
-                break;
+            if DEBUG {
+                println!("P {} receives: {}", &ref_id, &count);
             }
+            send_until_success(resp_body.clone(), res.unwrap());
+            count += 1;
         }
     }
     if DEBUG {
