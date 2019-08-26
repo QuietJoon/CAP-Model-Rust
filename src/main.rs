@@ -11,7 +11,7 @@ use cap_model::data::*;
 use cap_model::util::*;
 use cap_model::*;
 
-const TRIAL: usize = 3000;
+const TRIAL: usize = 10000;
 const ORG: usize = 3;
 
 fn main() {
@@ -36,7 +36,7 @@ fn main() {
             let a_req_body = format!("ReqBody#{:04}", tn);
             let a_tx = tx_addr.clone();
             let a_tx_resp = tx_resp.clone();
-            let a_tx_end = if tn == TRIAL-1 && org == ORG-1 {
+            let a_tx_end = if tn == TRIAL - 1 && org == ORG - 1 {
                 Some(tx_end.clone())
             } else {
                 None
@@ -53,9 +53,9 @@ fn main() {
                     println!("{}", res);
                 }
                 send_until_success(res, a_tx_resp);
-                if tn == TRIAL-1 && org == ORG-1 {
+                if tn == TRIAL - 1 && org == ORG - 1 {
                     eprintln!("End Calling");
-                    send_until_success((),a_tx_end.unwrap());
+                    send_until_success((), a_tx_end.unwrap());
                 }
             });
         }
